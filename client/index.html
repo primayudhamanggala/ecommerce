@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type='text/javascript' src="script.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.add-to-cart').on('click',function(){
+            $('html, body').animate({
+                'scrollTop' : $(".cart_anchor").position().top
+            });
+            var itemImg = $(this).parent().find('img').eq(0);
+            flyToElement($(itemImg), $('.cart_anchor'));
+        });
+    });
+    </script>
+
+  </head>
+  <body>
+    <div id="app">
+      <header class="navbar">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="search here" style="width: 1300px">
+              </div>
+              <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Sign Up</a></li>
+              <li><a href="#">Sign In</a></li>
+              <div id="status">
+              </div>
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <div id="wrapper">
+        <div class="cart_anchor">
+          <img src="/Assets/shopping_cart2.png" style="width:35px">
+        </div>
+        <div id="checkout">
+          CHECKOUT
+        </div>
+        <div id="sidebar">
+          <h3>CART</h3>
+          <div id="cart">
+            <span class="empty">No items in cart.</span>
+          </div>
+
+          <h3>CATEGORIES</h3>
+          <div class="checklist categories">
+            <ul>
+              <li v-for="item in items">{{item.category}}</li>
+            </ul>
+          </div>
+          <h3>PRICE RANGE</h3>
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/price-range.png" alt="" />
+        </div>
+
+      <!-- Thumbnails of products -->
+        <div class="container">
+          <div class = "row">
+            <a class="cart_anchor"></a>
+            <div class = "col-sm-6 col-md-2"  v-for="item in items">
+              <h3>{{item.category}}</h3>
+              <div class = "thumbnail items">
+                <img v-bind:src ="item.image"><br><button href="javascript:void(0);" class="add-to-cart">Add to cart</button>
+                <div class = "caption">
+                  <h3>{{item.itemName}}</h3>
+                  <p>$ {{item.price}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+
+
+  <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6 footerleft ">
+            <h6 class="heading7">ABOUT US</h6>
+            <ul class="footer-ul">
+              <li><a href="#"> Career</a></li>
+              <li><a href="#"> Privacy Policy</a></li>
+              <li><a href="#"> Terms & Conditions</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-6 paddingtop-bottom">
+            <h6 class="heading7">GENERAL LINKS</h6>
+            <ul class="footer-ul">
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-6 paddingtop-bottom">
+            <h6 class="heading7">CONNECT WITH US</h6>
+            <img src="/Assets/145797-social-network-logo-collection/png/facebook.png" style="width: 40px">
+            <img src="/Assets/145797-social-network-logo-collection/png/twitter.png" style="width: 40px" hspace="20">
+            <img src="/Assets/145797-social-network-logo-collection/png/google-plus.png" style="width: 40px"><br><br>
+            <img src="/Assets/145797-social-network-logo-collection/png/pinterest.png" style="width: 40px">
+            <img src="/Assets/145797-social-network-logo-collection/png/instagram.png" style="width: 40px" hspace="20">
+            <img src="/Assets/145797-social-network-logo-collection/png/tumblr.png" style="width: 40px"><br><br>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright">
+      <div class="container">
+        <div class="col-md-3">
+          <P>Something store Logo</p>
+          </div>
+          <div class="col-md-4">
+            <p>© 2017 - All Rights with SomStore</p>
+          </div>
+          <div class="col-md-5">
+            <ul class="bottom_ul">
+              <li><a href="#">somstore.com</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Faqs</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Site Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          items: []
+        },
+        methods: {
+          getItems: () => {
+            axios.get('http://localhost:3000/items')
+            .then((res) => {
+              app.items = res.data
+            })
+            .catch((err) => {
+              console.log(err.message);
+            })
+          }
+        },
+        mounted: function(){
+          this.getItems()
+        }
+      })
+
+    </script>
+</html>
